@@ -1,23 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 import {
+  MobileIcon,
   Nav,
   NavbarContainer,
-  NavLogo,
-  MobileIcon,
-  NavMenu,
   NavItem,
   NavLinks,
+  NavLogo,
+  NavMenu,
   NavBtn,
   NavBtnLink,
 } from "./NavbarElements";
 
 const Navbar = ({ toggle }) => {
+  const [scrollNav, setScrollNav] = useState(false);
+
+  const changeNav = () => {
+    if (window.scrollY >= 80) {
+      setScrollNav(true);
+    } else {
+      setScrollNav(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", changeNav);
+  }, []);
+
+  const toggleHome = () => {
+    window.scroll.scrollToTop();
+  };
   return (
     <>
-      <Nav>
+      <Nav scrollNav={scrollNav}>
         <NavbarContainer>
-          <NavLogo onClick={toggle} to="/">
+          <NavLogo onClick={toggleHome} to="/">
             ANDA
           </NavLogo>
           <MobileIcon onClick={toggle}>
@@ -25,16 +42,52 @@ const Navbar = ({ toggle }) => {
           </MobileIcon>
           <NavMenu>
             <NavItem>
-              <NavLinks to="about">Sobre Nosotros</NavLinks>
+              <NavLinks
+                to="about"
+                smooth={true}
+                duration={500}
+                spy={true}
+                exact="true"
+                offset={-80}
+              >
+                Sobre Nosotros
+              </NavLinks>
             </NavItem>
             <NavItem>
-              <NavLinks to="spaces">Tu espacio ideal</NavLinks>
+              <NavLinks
+                to="spaces"
+                smooth={true}
+                duration={500}
+                spy={true}
+                exact="true"
+                offset={-80}
+              >
+                Tu espacio ideal
+              </NavLinks>
             </NavItem>
             <NavItem>
-              <NavLinks to="services">Que ofrecemos</NavLinks>
+              <NavLinks
+                to="services"
+                smooth={true}
+                duration={500}
+                spy={true}
+                exact="true"
+                offset={-80}
+              >
+                Que ofrecemos
+              </NavLinks>
             </NavItem>
             <NavItem>
-              <NavLinks to="signup">Sign up</NavLinks>
+              <NavLinks
+                to="signup"
+                smooth={true}
+                duration={500}
+                spy={true}
+                exact="true"
+                offset={-80}
+              >
+                Sign up
+              </NavLinks>
             </NavItem>
           </NavMenu>
           <NavBtn>
